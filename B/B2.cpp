@@ -1,33 +1,42 @@
 #include<iostream>
 using namespace std;
 
+int largest(int arr[], int n)
+{
+    int i;
+    int max = arr[0];
+    for (i = 1; i < n; i++)
+        if (arr[i] > max)
+            max = arr[i];
+    return max;
+}
+
 int main() 
 {
-    int arr[10],n;
+    int arr[10],n,i,max,ele;
     cout<<"\nEnter length of the array : ";
     cin>>n;
     cout<<"\nEnter selling price of each day :";
     for(int i=0;i<n;i++){
         cin>>arr[i];
     }
-    int pro[10],bp=arr[0];
-   
-    for(int i=0;i<n;i++) {
-        for(int j=1;j<n;j++){
-            if(bp<arr[j]){
-                pro[i]=arr[j]-bp;
-            }
-            
-        }
-    }
-    int count=0;
-    for(int i=0;i<n;i++)
+    max = largest(arr,n);
+    cout<<max;
+    i = 0;
+    while (i < n)
     {
-        if(pro[0] < pro[i])
-        {
-            pro[0]=pro[i];
+        if (arr[i] == max) {
+            break;
         }
-        // count=i;
+        i++;
     }
-    cout<<"\nMaximun profit gained is "<<pro[0]<<" at day "<< count+1 << " at selling price "<<arr[count];
+    int res[10],mp=0;
+    for(int j=0;j<i;j++){
+        res[j]= max - arr[j];
+    }
+    for(int j=0;j<i;j++) {
+        mp = mp + res[j];
+    }
+    cout<<"\nMAximum profit gained is "<<mp<<" on day"<<i+1;
+    return 0;   
 }
